@@ -1,7 +1,7 @@
 package com.example;
 
 import com.example.controllers.MainController;
-import com.example.models.DataService;
+import com.example.models.EmployeeService;
 import com.example.models.Sqlite;
 import com.example.views.ConsoleView;
 
@@ -11,7 +11,7 @@ public class Main {
 
         MainController controller = new MainController(
             new ConsoleView(), 
-            new DataService(new Sqlite())
+            new EmployeeService(new Sqlite())
         );
         controller.start();
     }

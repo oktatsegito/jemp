@@ -7,10 +7,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-public class DataService {
+public class EmployeeService {
     
     Database database;
-    public DataService(Database database) {
+    public EmployeeService(Database database) {
         this.database = database;
     }
 
