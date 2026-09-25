@@ -3,6 +3,9 @@ package com.example.controllers;
 import java.util.ArrayList;
 
 import com.example.models.EmployeeService;
+import com.example.models.Mariadb;
+import com.example.models.Sqlite;
+import com.example.models.Config;
 import com.example.models.Employee;
 import com.example.views.ConsoleView;
 import com.example.views.EmployeeView;
@@ -10,13 +13,21 @@ import com.example.views.EmployeeView;
 public class MainController {
     private final ConsoleView console;
     private final EmployeeView employeeView;
-    private final EmployeeService employeeService;
+    private EmployeeService employeeService;
     private boolean isRuning = true;
 
-    public MainController(ConsoleView console, EmployeeService employeeService) {
-        this.console = console;
+    public MainController() {
+        this.console = new ConsoleView();
         this.employeeView = new EmployeeView();
-        this.employeeService = employeeService;
+        Config config = new Config();
+        String dialect = config.getProperty("dealect");
+        if(dialect.equals("sqlite")) {
+            this.employeeService = new EmployeeService(new Sqlite());
+        } if(dialect.equals("mariadb")) {
+            this.employeeService = new EmployeeService(new Mariadb());
+        } else {
+            this.employeeService = new EmployeeService(new Sqlite());
+        }
     }
 
     public void start() {
